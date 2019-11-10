@@ -1,0 +1,5 @@
+{
+  "ConnectionStrings": {
+    "LaunchConnection": "Server=(localdb)\\mssqllocaldb;Database=LaunchAppDB;Trusted_Connection=True;MultipleActiveResultSets=true"
+  }
+}
