@@ -7,7 +7,7 @@ namespace Launch.Repository.Repositorios
 {
     public class BaseRepositorio<TEntity> : IBaseRepositorio<TEntity> where TEntity : class
     {
-        protected readonly LaunchContexto _launchContexto;
+        private readonly LaunchContexto _launchContexto;
 
         public BaseRepositorio(LaunchContexto launchContexto)
         {

@@ -2,7 +2,8 @@
 
 namespace Launch.Domain.Services
 {
-    public  interface ICandidatoService : IServiceBase<Candidato>
+    public interface ICandidatoService : IServiceBase<Candidato>
     {
+        Candidato BuscarPorEmail(string email);
     }
 }

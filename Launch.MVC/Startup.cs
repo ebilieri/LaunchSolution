@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Launch.Domain.Contratos;
+﻿using Launch.Domain.Contratos;
+using Launch.Domain.Services;
 using Launch.Repository.Contexto;
 using Launch.Repository.Repositorios;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -43,11 +39,14 @@ namespace Launch.MVC
                             m.MigrationsAssembly("Launch.Repository")));
 
 
-            // Mapeamento Injeção de dependencia
+            // Mapeamento Injeção de dependencia Repositorios 
             services.AddScoped<ICandidatoRepositorio, CandidatoRepositorio>();
             services.AddScoped<IVotacaoRepositorio, VotacaoRepositorio>();
             services.AddScoped<IVotacaoDiariaRepositorio, VotacaoDiariaRepositorio>();
             services.AddScoped<IVotacaoSemanalRepositorio, VotacaoSemanalRepositorio>();
+
+            // Mapeamento Injeção de dependencia Services
+            services.AddScoped<ICandidatoService, CandidatoService>();
 
             services.Configure<CookiePolicyOptions>(options =>
             {
@@ -56,6 +55,11 @@ namespace Launch.MVC
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+
+            AutoMapper.Mapper.Initialize((cfg) =>
+            {
+                cfg.AddProfile<AutoMapperConfig.MappingProfile>();
+            });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }

@@ -8,13 +8,29 @@ namespace Launch.Domain.Services
 {
     public class CandidatoService : ServiceBase<Candidato>, ICandidatoService
     {
-        public CandidatoService(IBaseRepositorio<Candidato> repository) : base(repository)
+        private readonly ICandidatoRepositorio _candidatoRepositorio;
+        public CandidatoService(ICandidatoRepositorio candidatoRepositorio) : base(candidatoRepositorio)
         {
+            _candidatoRepositorio = candidatoRepositorio;
         }
 
         public override void Adicionar(Candidato entity)
         {
-            base.Adicionar(entity);
+            entity.Email = entity.Email.ToLower();
+
+            if (BuscarPorEmail(entity.Email) == null)
+            {
+                base.Adicionar(entity);
+            }
+            else
+            {
+                entity.AdicionarMensagem("Email já está sendo utilizado");
+            }
+        }
+
+        public Candidato BuscarPorEmail(string email)
+        {            
+            return _candidatoRepositorio.BusacarPorEmail(email);
         }
     }
 }

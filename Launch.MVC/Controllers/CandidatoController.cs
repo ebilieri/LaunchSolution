@@ -1,10 +1,9 @@
-﻿using Launch.Domain.Services;
+﻿using Launch.Domain.Entidades;
+using Launch.Domain.Services;
+using Launch.MVC.AutoMapperConfig;
 using Launch.MVC.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Launch.MVC.Controllers
 {
@@ -34,14 +33,35 @@ namespace Launch.MVC.Controllers
             if (!ModelState.IsValid)
                 return View(model);
 
-            try {
-               // _candidatoService.Adicionar(model);
+            try
+            {
+                // Mapping Model to Candidato
+                var obj = model.MapTo<Candidato>();
 
+                _candidatoService.Adicionar(obj);
+
+                model.Id = obj.Id;
+                model.MensagemValidacao = obj.MensagemValidacao;
+
+                if (model.Id > 0)
+                {
+                    return RedirectToAction("index", "home");
+                }
+                else if (model.MensagemValidacao != null && model.MensagemValidacao.Count > 0)
+                {
+                    foreach (var item in model.MensagemValidacao)
+                    {
+                        string message = string.Format("Atenção: {0}", item);
+                        ModelState.AddModelError(string.Empty, message);
+                    }
+                }
             }
             catch (Exception ex)
             {
-
+                string message = string.Format("Atenção: {0}", ex.Message);
+                ModelState.AddModelError(string.Empty, message);
             }
+
             return View(model);
         }
     }
