@@ -1,8 +1,72 @@
-﻿@{
+﻿@model Launch.MVC.Models.HomeModel
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
 </div>
+
+<main role="main">
+    <div class="album py-1 bg-light">
+
+        @if (Model.ListCandidatos != null)
+        {
+            <div class="container">
+                <h1 class="display-4">Escolha o Rei do almoço</h1>
+                <h3>Candidatos</h3>
+                <div class="row">
+                    <!--Lista de Candidatos-->
+                    @foreach (var item in Model.ListCandidatos)
+                    {
+                        <div class="col-md-4">
+                            <div class="card mb-4 shadow-sm">
+                                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                                <div class="card-body">
+                                    <p class="card-text">
+                                        @Html.DisplayFor(modelItem => item.Id)<br />
+                                        @Html.DisplayFor(modelItem => item.Nome)
+                                    </p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="btn-group">
+                                            @Html.ActionLink("Votar", "Votar", "Votacao", new { id = item.Id }, new { @class = "btn btn-success" })
+                                        </div>
+                                        <small class="text-muted">Total Votos: @Html.DisplayFor(modelItem => item.VotosDiario)</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+
+        @if (Model.CanditatoRei != null)
+        {
+            <div class="container">
+                <h1 class="display-4">Rei do almoço</h1>
+
+                <div class="row">
+                    <!--Lista de Candidatos-->
+
+                    <div class="col-md-8">
+                        <div class="card mb-4 shadow-sm">
+                            <svg class="bd-placeholder-img card-img-top" width="100%" height="525" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                            <div class="card-body">
+                                <p class="card-text">
+                                    @Html.DisplayFor(item => item.CanditatoRei.Id)<br />
+                                    @Html.DisplayFor(item => item.CanditatoRei.Nome)
+                                </p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <small class="text-muted">Total Votos: @Html.DisplayFor(item => item.CanditatoRei.VotosDiario)</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        }
+    </div>
+
+</main>

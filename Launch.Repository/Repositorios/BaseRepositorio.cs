@@ -1,4 +1,4 @@
-﻿using Launch.Domain.Contratos;
+﻿using Launch.Domain.Contratos.IRepositorio;
 using Launch.Repository.Contexto;
 using System.Collections.Generic;
 using System.Linq;

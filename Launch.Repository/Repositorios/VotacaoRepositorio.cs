@@ -1,4 +1,4 @@
-﻿using Launch.Domain.Contratos;
+﻿using Launch.Domain.Contratos.IRepositorio;
 using Launch.Domain.Entidades;
 using Launch.Repository.Contexto;
 

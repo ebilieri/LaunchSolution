@@ -1,8 +1,6 @@
-﻿using Launch.Domain.Contratos;
+﻿using Launch.Domain.Contratos.IRepositorio;
+using Launch.Domain.Contratos.IServices;
 using Launch.Domain.Entidades;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Launch.Domain.Services
 {

@@ -1,10 +1,7 @@
-﻿using Launch.Domain.Contratos;
+﻿using Launch.Domain.Contratos.IRepositorio;
 using Launch.Domain.Entidades;
 using Launch.Repository.Contexto;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Launch.Repository.Repositorios
 {
@@ -18,7 +15,8 @@ namespace Launch.Repository.Repositorios
 
         public Candidato BusacarPorEmail(string email)
         {
-            return _launchContexto.Set<Candidato>().Where(x => x.Email == email).FirstOrDefault();
+            return _launchContexto.Set<Candidato>()
+                .Where(x => x.Email == email).FirstOrDefault();
         }
     }
 }

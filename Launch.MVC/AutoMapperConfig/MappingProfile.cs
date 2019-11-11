@@ -7,10 +7,12 @@ namespace Launch.MVC.AutoMapperConfig
     {
         public MappingProfile()
         {
-            CreateMap<CandidatoModel, Candidato>();
-               // .ForSourceMember(x => x.VotosCandidato, opt => opt.Ignore())
-               // .ForSourceMember(x => x.VotosDiarioCandidato, opt => opt.Ignore())
-                //.ForSourceMember(x => x.VotosSemanalCandidato, opt => opt.Ignore());
+            CreateMap<CandidatoModel, Candidato>()
+                .ReverseMap()
+             // .ForMember(x => x.VotosCandidato, op => op.Ignore())
+             .ForPath(x => x.VotosDiario, opt => opt.Ignore());
+            // .ForMember(x => x.VotosDiarioCandidato, opt => opt.Ignore())
+            //.ForMember(x => x.VotosSemanalCandidato, opt => opt.Ignore());
         }
     }
 }

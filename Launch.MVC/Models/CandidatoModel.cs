@@ -29,6 +29,8 @@ namespace Launch.MVC.Models
         [DataType(DataType.Password)]
         public string ConfirmaSenha { get; set; }
 
+        public int VotosDiario { get; set; }
+
         public List<string> MensagemValidacao { get; set; }
     }
 }

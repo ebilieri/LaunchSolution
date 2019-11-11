@@ -1,4 +1,5 @@
-﻿using Launch.Domain.Contratos;
+﻿using Launch.Domain.Contratos.IRepositorio;
+using Launch.Domain.Contratos.IServices;
 using Launch.Domain.Services;
 using Launch.Repository.Contexto;
 using Launch.Repository.Repositorios;
@@ -47,6 +48,7 @@ namespace Launch.MVC
 
             // Mapeamento Injeção de dependencia Services
             services.AddScoped<ICandidatoService, CandidatoService>();
+            services.AddScoped<IVotacaoService, VotacaoService>();
 
             services.Configure<CookiePolicyOptions>(options =>
             {
